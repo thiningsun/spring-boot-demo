@@ -8,13 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller
+@RestController //为@Controller层和@ResponseBody 的汇合体
 @RequestMapping(value = "/config")
-//@EnableConfigurationProperties(ChProperties.class) 可能需要申明为  @Configuration注解 否则采用Autowired注入方式
+//@EnableConfigurationProperties(ChProperties.class)
+// 可能需要申明为  @Configuration注解 否则采用Autowired注入方式
 public class ConfigurationPropertiesController {
 
 
@@ -22,9 +24,10 @@ public class ConfigurationPropertiesController {
     private ChProperties chProperties;
 
     @GetMapping("/test")
-    @ResponseBody
+//    @ResponseBody
     public Map<String, Object> test(){
 
+        System.out.println("返回数据为："+chProperties.toString());
         Map<String, Object> map = new HashMap<>();
         System.out.println(chProperties.toString());
         System.out.println("111:"+chProperties.getUsername());
